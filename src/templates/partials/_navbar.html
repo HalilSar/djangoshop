@@ -1,0 +1,67 @@
+{%load static%}
+<section id="header">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">
+                    <img src="{% static 'images/edura-logo.png'%}" alt="Edura - Multipurpose Website Template">
+                </a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav">
+                    <li ><a href="/" >Ana Sayfa</a>   </li>
+                    <li > <a href="{% url 'aboutus' %}">Hakkımızda</a></li>
+                    <li> <a href="{% url 'product' %}">Alışveriş</a> </li>      
+                    <li> <a href="{% url 'contact' %}">İletişim</a> </li>      
+                     
+
+                    <li><a href="{% url 'shopcart' %}"><i class="fa fa-shopping-cart fa-fw"></i> 
+                        {%if request.session.cart_items == 0 %}
+                            Sepet 
+                        {% else %}
+                            Sepet <small>({{request.session.cart_items}})</small>   
+                        {%endif%}
+                    </a></li>   
+                    {% if user.is_authenticated %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                    role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>                                          
+                            <ul class="dropdown-menu">
+                                {% if user.is_superuser == 1 %}
+                                    <li><a href="/admin">Admin Sayfası</a></li>
+                                {% else %}
+                                    <li><a href="/user/user-profile">Kullanıcı Profilim</a></li>  
+                                {%endif%}       
+                                <li><a href="/user/orders">Şiparişlerim</a></li>
+                                <li><a href="/user/comments">Yorumlarım</a></li>               
+                                <!-- <li><a href="/user/products">Ürünlerim</a></li> -->
+                                <li><a href="/logout">Çıkış</a></li>
+                            </ul>                                                                                                                                                    
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'signup_view' %}">Kayıt</a>
+                    </li>
+                    <li>
+                        
+                        <a href="{% url 'login' %}">Giriş</a>
+                    </li>
+                    
+                    {% endif %}
+                </ul>           
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+</section>
+

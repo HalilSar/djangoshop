@@ -1,0 +1,10 @@
+*.pyc
+__pycache__
+myvenv
+db.sqlite3
+.DS_Store
+.vs code
+production.py
+Command.txt
+static_cdn
+
